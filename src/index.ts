@@ -1,9 +1,31 @@
-import { render } from './AppLoader';
+import { IDomanSliderConfig } from './IDomanSliderConfig';
 
-const element: HTMLElement | null = document.getElementById('root-element');
+export default class DomanSlider {
+	private containerElement: HTMLElement | null = null;
 
-if (element) {
-	render(element);
+	public constructor(configuration?: IDomanSliderConfig) {
+		const isSliderContainerExist: boolean = this.bindToWrapperElement(configuration?.containerElement);
+
+		if (!isSliderContainerExist) {
+			console.warn('There is no root element for the Doman Slider');
+
+			return;
+		}
+
+
+	}
+
+	private bindToWrapperElement = (elementId?: string): boolean => {
+		const containerElement = document.getElementById(elementId ?? 'doman-slider');
+
+		if (!containerElement) {
+			return false;
+		}
+		
+		this.containerElement = containerElement;
+
+		return true;
+	}
 }
 
-export {};
+const SliderInstance = new DomanSlider({} as IDomanSliderConfig);
