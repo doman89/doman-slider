@@ -1,9 +1,14 @@
-import { IDomanSliderConfig } from './IDomanSliderConfig';
+import { default as bemCssModules } from 'bem-css-modules';
+import { DomanSliderConfig } from './DomanSliderConfig';
+import { default as DomanSliderStyles } from './DomanSlider.module.scss';
+
+const styles = bemCssModules(DomanSliderStyles);
 
 export default class DomanSlider {
 	private containerElement: HTMLElement | null = null;
+	private slides: Element[] = [];
 
-	public constructor(configuration?: IDomanSliderConfig) {
+	public constructor(configuration?: DomanSliderConfig) {
 		const isSliderContainerExist: boolean = this.bindToWrapperElement(configuration?.containerElement);
 
 		if (!isSliderContainerExist) {
@@ -12,7 +17,15 @@ export default class DomanSlider {
 			return;
 		}
 
+		this.addSliderClassToWrapperElement();
+		this.bindToSlides();
+		this.addSlideClassToAllSlides();
+		
+	}
 
+	private bindToSlides = (): void => {
+		this.slides = Array.from((this.containerElement as HTMLElement).children);
+		this.slides.forEach(element => element.classList.add(styles('slide')));
 	}
 
 	private bindToWrapperElement = (elementId?: string): boolean => {
@@ -26,6 +39,10 @@ export default class DomanSlider {
 
 		return true;
 	}
+
+	private addSliderClassToWrapperElement = (): void => this.containerElement?.classList.add(styles());
+
+	private addSlideClassToAllSlides = (): void => this.slides.forEach(slide => slide.classList.add(styles('slide')));
 }
 
-const SliderInstance = new DomanSlider({} as IDomanSliderConfig);
+new DomanSlider();

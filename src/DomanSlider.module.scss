@@ -1,0 +1,19 @@
+.doman-slider {
+	display: grid;
+	box-sizing: border-box;
+	justify-items: stretch;
+	max-width: 100%;
+	overflow: hidden;
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	&__slide {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
