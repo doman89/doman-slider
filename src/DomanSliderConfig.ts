@@ -1,3 +1,4 @@
 export interface DomanSliderConfig {
-	containerElement: string; 
+	containerElement?: string;
+	numberOfRowsSlides?: number; 
 }
