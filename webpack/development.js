@@ -3,6 +3,7 @@ module.exports = {
 		contentBase: './public',
 		port: 3000,
 	},
+	devtool: 'inline-source-map',
 	module: {
 		rules: [
 			{
